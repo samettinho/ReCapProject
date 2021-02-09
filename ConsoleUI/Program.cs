@@ -16,7 +16,8 @@ namespace ConsoleUI
             Console.WriteLine("\n1-)Yeni bir araba ekleme" +
                               "\n2-)Bütün Arabaları Listeleme" +
                               "\n3-)RenkId'ye Göre Arabaları Listeleme" +
-                              "\n4-)BrandId'ye Göre Arabaları Listeleme");
+                              "\n4-)BrandId'ye Göre Arabaları Listeleme" +
+                              "\n5-)");
             Console.Write("Yapmak İstediğiniz İşlemin Numarasını Giriniz:");
             try
             {
@@ -82,12 +83,6 @@ namespace ConsoleUI
                         {
                             Console.WriteLine(car.Description);
                         }
-                        break;
-                    }
-                default:
-                    {
-                        Console.WriteLine("Yanlış seçim");
-                        Environment.Exit(0);
                         break;
                     }
             }
