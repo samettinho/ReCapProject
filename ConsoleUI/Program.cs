@@ -10,14 +10,19 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
 
         A:
             int istenenIslem = 0;
             Console.WriteLine("\n1-)Yeni bir araba ekleme" +
                               "\n2-)Bütün Arabaları Listeleme" +
                               "\n3-)RenkId'ye Göre Arabaları Listeleme" +
-                              "\n4-)BrandId'ye Göre Arabaları Listeleme" +
-                              "\n5-)");
+                              "\n4-)BrandId'ye Göre Arabaları Listeleme"+
+                              "\n5-)Markaları Listeleme" +
+                              "\n6-)Renkleri Listeleme"+
+                              "\n7-)Yeni bir renk ekleme" +
+                              "\n8-)Yeni bir marka ekleme" );
             Console.Write("Yapmak İstediğiniz İşlemin Numarasını Giriniz:");
             try
             {
@@ -48,7 +53,7 @@ namespace ConsoleUI
                         addedCar.Description = (Console.ReadLine());
 
                         Console.Write("Model Yılı giriniz:");
-                        addedCar.ModelYear = Convert.ToUInt32(Console.ReadLine());
+                        addedCar.ModelYear = (short)Convert.ToUInt32(Console.ReadLine());
 
                         carManager.Add(addedCar);
                         break;
@@ -56,9 +61,9 @@ namespace ConsoleUI
 
                 case 2:
                     {
-                        foreach (var car in carManager.GetAll())
+                        foreach (var car in carManager.GetCarDetails())
                         {
-                            Console.WriteLine(car.Description);
+                            Console.WriteLine(car.BrandName+" "+ car.Description+" "+car.ColorName+" "+car.DailyPrice);
                         }
                         break;
                     }
@@ -85,6 +90,44 @@ namespace ConsoleUI
                         }
                         break;
                     }
+                case 5:
+                    {
+                        foreach (var brand in brandManager.GetAll())
+                        {
+                            Console.WriteLine(brand.BrandName);
+                        }
+                        break;
+                    }
+                case 6:
+                    {
+                        foreach (var color in colorManager.GetAll())
+                        {
+                            Console.WriteLine(color.ColorName);
+                        }
+                        break;
+                    }
+                case 7:
+                    {
+                        Color addedColor = new Color();
+
+                        Console.Write("\n Renk adı giriniz:");
+                        addedColor.ColorName = Console.ReadLine();
+
+                        colorManager.Add(addedColor);
+                        break;
+                    }
+                case 8:
+                    {
+                        Brand addedBrand = new Brand();
+
+                        Console.Write("\n Marka adı giriniz:");
+                        addedBrand.BrandName = Console.ReadLine();
+
+                        brandManager.Add(addedBrand);
+                        break;
+                    }
+                
+               
             }
 
             Console.Write("\nDevam Etmek için 1'e çıkmak için 2'ye basınız:");
